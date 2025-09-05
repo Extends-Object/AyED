@@ -75,7 +75,10 @@ public class Main {
         System.out.println("Impares mayores que 4: " + RecorridosAG.numerosImparesMayoresQuePorNiveles(raiz, 4));
 
 
-
+//        Si ahora tuviera que implementar estos métodos en la clase ArbolGeneral <T>,
+//        ¿qué modificaciones haría tanto en la firma como en la implementación de los mismos?
+//        - Deja de recibir el arbol como parametro
+//        - Moveria la logica de los recorridos pero mantendria separada la logica de "menores que"
 
     }
 }
