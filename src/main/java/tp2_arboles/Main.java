@@ -168,7 +168,6 @@ public class Main {
 
         System.out.println("--------------------------------------------------------------------------------------\n");
 
-        //hojas de 2
         ArbolGeneral<Integer> h5 = new ArbolGeneral<>(5);
         ArbolGeneral<Integer> h6 = new ArbolGeneral<>(6);
         ArbolGeneral<Integer> h7 = new ArbolGeneral<>(7);
@@ -194,13 +193,20 @@ public class Main {
         n1.agregarHijo(n3);
         n1.agregarHijo(n4);
 
-        System.out.println("Altura de este arbol: " + n1.altura());
+        System.out.println("Altura de este arbol: " + n1.altura() + "\n");
+
         System.out.println("Nivel de este dato (3): este dato esta en el nivel " + n1.nivel(3) + " de profundidad.");
         System.out.println("Nivel de este dato (1):  este dato esta en el nivel " + n1.nivel(1) + " de profundidad.");
-        System.out.println("Nivel de este dato (9):  este dato esta en el nivel " + n1.nivel(9) + " de profundidad.");
-        System.out.println("\n");
-        System.out.println("El ancho de este arbol es: " + n1.ancho());
+        System.out.println("Nivel de este dato (9):  este dato esta en el nivel " + n1.nivel(9) + " de profundidad.\n");
 
+        System.out.println("El ancho de este arbol es: " + n1.ancho() + "\n");
+
+        System.out.println("¿3 es ancestro de 1?: " + n1.esAncestro(3, 1) + "\n");
+        System.out.println("¿4 es ancestro de 9?: " + n1.esAncestro(4, 9) + "\n");
+        System.out.println("¿9 es ancestro de 8?: " + n1.esAncestro(9, 8) + "\n");
+        System.out.println("¿2 es ancestro de 4?: " + n1.esAncestro(2, 4) + "\n");
+        System.out.println("¿2 es ancestro de 6?: " + n1.esAncestro(2, 6) + "\n");
+        System.out.println("¿6 es ancestro de 6?: " + n1.esAncestro(6, 6) + "\n");
 
 
 

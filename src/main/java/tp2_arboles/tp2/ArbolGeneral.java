@@ -240,11 +240,58 @@ public class ArbolGeneral<T> {
 		return ancho;
 	}
 
+//----------------------------------------------------------------------------------------------------------------------
 	public Boolean esAncestro(T a, T b) {
+
+		ListaGenerica<ArbolGeneral<T>> listaNodos = new ListaEnlazadaGenerica<>();
+		ColaGenerica<ArbolGeneral<T>> cola = new ColaGenerica<>();
+		ArbolGeneral<T> nodoA = this.buscarNodo(this, a, listaNodos, cola);
+
+		if (nodoA == null) return false;
+
+		ListaEnlazadaGenerica<T> listaAux = new ListaEnlazadaGenerica<>();
+		this.recorridoAuxiliarPre(nodoA, listaAux);
+
+		listaAux.comenzar();
+
+		while (!listaAux.fin()) {
+			if (listaAux.proximo().equals(b)) {
+				return true;
+			}
+		}
 		return false;
 	}
 
+	private ArbolGeneral<T> buscarNodo (ArbolGeneral<T> arbol, T a, ListaGenerica<ArbolGeneral<T>> listaNodos, ColaGenerica<ArbolGeneral<T>> cola) {
+		if (arbol.esVacio()){
+			return null;
+		}
+		if (arbol.getDato().equals(a)) {
+			return arbol;
+		}
+
+		listaNodos.agregarFinal(arbol);
+
+		if (arbol.tieneHijos()) {
+			ListaGenerica<ArbolGeneral<T>> listaHijos = arbol.getHijos();
+			listaHijos.comenzar();
+			while (!listaHijos.fin()) {
+				cola.encolar(listaHijos.proximo());
+			}
+		}
+
+		while (!cola.esVacia()) {
+			ArbolGeneral<T> encontrado = buscarNodo(cola.desencolar(), a, listaNodos, cola);
+			if (encontrado != null) {
+				return encontrado;
+			}
+		}
+		return null;
+	}
+//----------------------------------------------------------------------------------------------------------------------
+
 	public Boolean esArbolLleno() {
+
 		return false;
 	}
 
