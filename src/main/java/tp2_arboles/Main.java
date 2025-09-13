@@ -1,6 +1,13 @@
 package tp2_arboles;
 
+import tp1_listas_enlazadas.ejercicio3.ColaGenerica;
+import tp2_arboles.tp1.ListaEnlazadaGenerica;
+import tp2_arboles.tp1.ListaGenerica;
 import tp2_arboles.tp2.ArbolGeneral;
+import tp2_arboles.tp2.Ejercicio_4.AnalizadorArbol;
+import tp2_arboles.tp2.Ejercicio_4.AreaEmpresa;
+import tp2_arboles.tp2.Ejercicio_5.RedDeAguaPotable;
+import tp2_arboles.tp2.RecorridosAG;
 
 public class Main {
     public static void main(String[] args) {
@@ -42,22 +49,35 @@ public class Main {
         //hojas de 2
         ArbolGeneral<Integer> hoja5 = new ArbolGeneral<>(5);
         ArbolGeneral<Integer> hoja6 = new ArbolGeneral<>(6);
-        ArbolGeneral<Integer> hoja7 = new ArbolGeneral<>(7);
+
+        //hojas de 4
+        ArbolGeneral<Integer> hoja8 = new ArbolGeneral<>(8);
+        ArbolGeneral<Integer> hoja9 = new ArbolGeneral<>(9);
+
+        //hoja de 7
+        ArbolGeneral<Integer> hoja10 = new ArbolGeneral<>(10);
 
         //hojas de 1
         ArbolGeneral<Integer> hoja3 = new ArbolGeneral<>(3);
-        ArbolGeneral<Integer> hoja4 = new ArbolGeneral<>(4);
+
+
+        ArbolGeneral<Integer> nodo4 = new ArbolGeneral<>(4);
+        nodo4.agregarHijo(hoja8);
+        nodo4.agregarHijo(hoja9);
+
+        ArbolGeneral<Integer> nodo7 = new ArbolGeneral<>(7);
+        nodo7.agregarHijo(hoja10);
 
 
         ArbolGeneral<Integer> nodo2 = new ArbolGeneral<>(2);
         nodo2.agregarHijo(hoja5);
         nodo2.agregarHijo(hoja6);
-        nodo2.agregarHijo(hoja7);
+        nodo2.agregarHijo(nodo7);
 
         ArbolGeneral<Integer> raiz = new ArbolGeneral<>(1);
         raiz.agregarHijo(nodo2);
         raiz.agregarHijo(hoja3);
-        raiz.agregarHijo(hoja4);
+        raiz.agregarHijo(nodo4);
 
 //        System.out.println("INORDEN: " + raiz.inOrden());
 //        System.out.println("PREORDEN: " + raiz.preOrden());
@@ -71,7 +91,6 @@ public class Main {
 
 
         System.out.println("NIVELES: " + raiz.niveles());
-
         System.out.println("Impares mayores que 4: " + RecorridosAG.numerosImparesMayoresQuePorNiveles(raiz, 4));
 
 
@@ -79,6 +98,114 @@ public class Main {
 //        ¿qué modificaciones haría tanto en la firma como en la implementación de los mismos?
 //        - Deja de recibir el arbol como parametro
 //        - Moveria la logica de los recorridos pero mantendria separada la logica de "menores que"
+
+
+        System.out.println("\n");
+
+        System.out.println("PRUEBA PROMEDIO: " + raiz.mayorPromedio());
+
+        System.out.println("--------------------------------------------------------------------------------------\n");
+
+        ListaGenerica<Integer> listaAux = new ListaEnlazadaGenerica<>();
+        ColaGenerica<ArbolGeneral<Integer>> cola = new ColaGenerica<>();
+        raiz.listaValoresPorNivel(raiz, listaAux, cola);
+        System.out.println(listaAux);
+
+        System.out.println("--------------------------------------------------------------------------------------\n");
+
+        //EJERCICIO 4
+
+        ArbolGeneral<AreaEmpresa> area10 = new ArbolGeneral<>(new AreaEmpresa("Area 10", 10));
+
+        ArbolGeneral<AreaEmpresa> area2 = new ArbolGeneral<>(new AreaEmpresa("Area 2", 3));
+        ArbolGeneral<AreaEmpresa> area4 = new ArbolGeneral<>(new AreaEmpresa("Area 4", 15));
+        ArbolGeneral<AreaEmpresa> area9 = new ArbolGeneral<>(new AreaEmpresa("Area 9", 35));
+
+        area10.agregarHijo(area2);
+        area10.agregarHijo(area4);
+        area10.agregarHijo(area9);
+
+        ArbolGeneral<AreaEmpresa> area15 = new ArbolGeneral<>(new AreaEmpresa("Area 15", 13));
+
+        area4.agregarHijo(area15);
+
+        System.out.println("Mayor promedio de todas las areas: " + AnalizadorArbol.devolverMaximoPromedio(area10));
+
+        System.out.println("\n");
+//----------------------------------------------------------------------------------------------------------------------
+        ArbolGeneral<Double> maestro = new ArbolGeneral<>(0.0);
+
+        ArbolGeneral<Double> caño2 = new ArbolGeneral<>(0.0);
+        ArbolGeneral<Double> caño3 = new ArbolGeneral<>(0.0);
+        ArbolGeneral<Double> caño4 = new ArbolGeneral<>(0.0);
+        ArbolGeneral<Double> caño5 = new ArbolGeneral<>(0.0);
+
+        maestro.agregarHijo(caño2);
+        maestro.agregarHijo(caño3);
+        maestro.agregarHijo(caño4);
+        maestro.agregarHijo(caño5);
+
+        caño3.agregarHijo(new ArbolGeneral<>(0.0));
+        ArbolGeneral<Double> caño7 = new ArbolGeneral<>(0.0);
+        caño3.agregarHijo(caño7);
+
+
+        caño4.agregarHijo(new ArbolGeneral<>(0.0));
+        caño4.agregarHijo(new ArbolGeneral<>(0.0));
+        ArbolGeneral<Double> caño10 = new ArbolGeneral<>(0.0);
+        caño4.agregarHijo(caño10);
+        caño4.agregarHijo(new ArbolGeneral<>(0.0));
+        caño4.agregarHijo(new ArbolGeneral<>(0.0));
+
+        caño7.agregarHijo(new ArbolGeneral<>(0.0));
+        caño10.agregarHijo(new ArbolGeneral<>(0.0));
+        caño10.agregarHijo(new ArbolGeneral<>(0.0));
+
+        RedDeAguaPotable red = new RedDeAguaPotable(maestro);
+
+        double minimo = red.minimoCaudal(1000.0);
+        System.out.println("Caudal mínimo recibido por una casa: " + minimo);
+
+        System.out.println("--------------------------------------------------------------------------------------\n");
+
+        //hojas de 2
+        ArbolGeneral<Integer> h5 = new ArbolGeneral<>(5);
+        ArbolGeneral<Integer> h6 = new ArbolGeneral<>(6);
+        ArbolGeneral<Integer> h7 = new ArbolGeneral<>(7);
+
+        ArbolGeneral<Integer> n8 = new ArbolGeneral<>(8);
+
+        ArbolGeneral<Integer> h9 = new ArbolGeneral<>(9);
+
+        ArbolGeneral<Integer> n3 = new ArbolGeneral<>(3);
+
+        ArbolGeneral<Integer> n4 = new ArbolGeneral<>(4);
+        n4.agregarHijo(n8);
+        n8.agregarHijo(h9);
+
+        n3.agregarHijo(h7);
+
+        ArbolGeneral<Integer> n2 = new ArbolGeneral<>(2);
+        n2.agregarHijo(h5);
+        n2.agregarHijo(h6);
+
+        ArbolGeneral<Integer> n1 = new ArbolGeneral<>(1);
+        n1.agregarHijo(n2);
+        n1.agregarHijo(n3);
+        n1.agregarHijo(n4);
+
+        System.out.println("Altura de este arbol: " + n1.altura());
+        System.out.println("Nivel de este dato (3): este dato esta en el nivel " + n1.nivel(3) + " de profundidad.");
+        System.out.println("Nivel de este dato (1):  este dato esta en el nivel " + n1.nivel(1) + " de profundidad.");
+        System.out.println("Nivel de este dato (9):  este dato esta en el nivel " + n1.nivel(9) + " de profundidad.");
+        System.out.println("\n");
+        System.out.println("El ancho de este arbol es: " + n1.ancho());
+
+
+
+
+
+
 
     }
 }

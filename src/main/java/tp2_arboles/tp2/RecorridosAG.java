@@ -1,8 +1,7 @@
-package tp2_arboles;
+package tp2_arboles.tp2;
 
 import tp2_arboles.tp1.ListaEnlazadaGenerica;
 import tp2_arboles.tp1.ListaGenerica;
-import tp2_arboles.tp2.ArbolGeneral;
 
 import java.util.function.Function;
 
